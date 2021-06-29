@@ -3,9 +3,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Test {
     public static void main(String[] args) {
 
-        AtomicBoolean condition = new AtomicBoolean(true);
-
-        Spinner s = new Spinner(condition);
+        Spinner s = new Spinner();
 
         s.run();
 
@@ -15,6 +13,6 @@ public class Test {
             ;
         }
 
-        condition.set(false);
+        s.stop();
     }
 }

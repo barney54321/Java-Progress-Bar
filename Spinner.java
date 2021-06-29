@@ -6,18 +6,18 @@ public class Spinner {
 
     private AtomicBoolean condition;
 
-    private int waitTime;
+    private int speed;
 
     private int index;
 
-    public Spinner(AtomicBoolean condition, int waitTime) {
-        this.condition = condition;
-        this.waitTime = waitTime;
+    public Spinner(int speed) {
+        this.condition = new AtomicBoolean(true);
+        this.speed = speed;
         this.index = 0;
     }
 
-    public Spinner(AtomicBoolean condition) {
-        this(condition, 50);
+    public Spinner() {
+        this(100);
     }
 
     public void run() {
@@ -27,7 +27,7 @@ public class Spinner {
                     System.out.print(" " + symbols[index] + "\r");
                     index++;
                     index = index % symbols.length;
-                    Thread.sleep(this.waitTime);
+                    Thread.sleep(this.speed);
                 } catch (InterruptedException e) {
                     ;
                 }
@@ -37,6 +37,10 @@ public class Spinner {
         });
 
         thread.start();
+    }
+
+    public void stop() {
+        this.condition.set(false);
     }
 
 }
